@@ -1,13 +1,13 @@
 # BVSR
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-Batch Video Size Reduction (BVSR) using FFMPEG
+Batch Video Size Reduction (BVSR) using [ffmpeg](https://ffmpeg.org).
 
 A python script to reduce the size of all videos in a folder while keeping its exact structure.
 
 ## Requirements
 + Python 3
-+ [FFMPEG](https://ffmpeg.org/download.html) 
++ [ffmpeg](https://ffmpeg.org/download.html) 
 
 ## Installation
 ```bash
