@@ -393,22 +393,16 @@ if __name__ == '__main__':
     parser.add_argument('source_folder', type=str, help="The Source folder of the videos")
 
     # Optional args
+    parser.add_argument('--version', action='version', version=f'%(prog)s {__version__}')
+
     parser.add_argument('--destination-folder', default=None,
                         help='The directory where the output videos will be stored, default to the same folder name '
                              'with `bvsr` suffix in the parent directory')
-    parser.add_argument('--version', action='version', version=f'%(prog)s {__version__}')
-    parser.add_argument('--ffmpeg-exec', default='ffmpeg',
-                        help='The ffmpeg executable file, default to `ffmpeg`')
-    parser.add_argument('--encoder', default='libx264',
-                        help='The video encoder name')
-    parser.add_argument('-i', '--ignore-other-files', action='store_true',
-                        help='Ignore the other non-video files, the default operation is to copy the other files to the'
-                             ' target folder to keep the same source folder structure')
+
     group = parser.add_mutually_exclusive_group()
     group.add_argument('--crf', default=23, type=int,
                        help='Target Constant Rate Factor (CRF) value (RECOMMENDED)'
                             '[More info at: https://trac.ffmpeg.org/wiki/Encode/H.264]')
-
     group.add_argument('--video-quality', default=None,
                        help=f'Target video quality. Available qualities: {list(VIDEO_BITRATES.keys())}')
     group.add_argument('--target-size', default=None, type=float,
@@ -417,6 +411,13 @@ if __name__ == '__main__':
                         help=f'Target audio quality. Default to the audio quality of the source video. '
                              f'Available qualities: {list(AUDIO_BITRATES.keys())}')
 
+    parser.add_argument('--ffmpeg-exec', default='ffmpeg',
+                        help='The ffmpeg executable file, default to `ffmpeg`')
+    parser.add_argument('--encoder', default='libx264',
+                        help='The video encoder name')
+    parser.add_argument('-i', '--ignore-other-files', action='store_true',
+                        help='Ignore the other non-video files, the default operation is to copy the other files to the'
+                             ' target folder to keep the same source folder structure')
     args = parser.parse_args()
 
     bvsr = BVSR(source_folder=args.source_folder,

@@ -21,8 +21,9 @@ git clone https://github.com/abdeladim-s/bvsr && cd bvsr
 
 ## Usage
 ```bash
-usage: bvsr.py [-h] [--destination-folder DESTINATION_FOLDER] [--version] [--ffmpeg-exec FFMPEG_EXEC] [--encoder ENCODER] [-i]
+usage: bvsr.py [-h] [--version] [--destination-folder DESTINATION_FOLDER]
                [--crf CRF | --video-quality VIDEO_QUALITY | --target-size TARGET_SIZE] [--audio-quality AUDIO_QUALITY]
+               [--ffmpeg-exec FFMPEG_EXEC] [--encoder ENCODER] [-i]
                source_folder
 
 positional arguments:
@@ -30,16 +31,10 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
+  --version             show program's version number and exit
   --destination-folder DESTINATION_FOLDER
                         The directory where the output videos will be stored, default to the same folder name with `bvsr` suffix in the
                         parent directory
-  --version             show program's version number and exit
-  --ffmpeg-exec FFMPEG_EXEC
-                        The ffmpeg executable file, default to `ffmpeg`
-  --encoder ENCODER     The video encoder name
-  -i, --ignore-other-files
-                        Ignore the other non-video files, the default operation is to copy the other files to the target folder to keep the
-                        same source folder structure
   --crf CRF             Target Constant Rate Factor (CRF) value (RECOMMENDED)[More info at: https://trac.ffmpeg.org/wiki/Encode/H.264]
   --video-quality VIDEO_QUALITY
                         Target video quality. Available qualities: ['videophone', 'videoconferencing', '240p', '360p', '480p', 'VCD', '720p',
@@ -49,6 +44,13 @@ options:
   --audio-quality AUDIO_QUALITY
                         Target audio quality. Default to the audio quality of the source video. Available qualities: ['low', 'mid-range',
                         'medium', 'high', 'highest']
+  --ffmpeg-exec FFMPEG_EXEC
+                        The ffmpeg executable file, default to `ffmpeg`
+  --encoder ENCODER     The video encoder name
+  -i, --ignore-other-files
+                        Ignore the other non-video files, the default operation is to copy the other files to the target folder to keep the
+                        same source folder structure
+
 
 ```
 
@@ -59,7 +61,7 @@ options:
 python bvsr --crf 34 /path/to/the/source_folder
 ```
 This will output the results in a folder in the parent directory with the same name of your `source_folder` suffixed with `_bvsr`. 
-The output folder will have the same structure as the `source_folder` (i.e. processing the video files and just copying any other files. Use `--ignore-other-files` to ignore them instead).
+The output folder will have the same structure as the `source_folder` (i.e. processing the video files and just copying any other file. Use `--ignore-other-files` to ignore them instead).
 
 ## 
 
