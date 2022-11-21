@@ -57,9 +57,16 @@ options:
 ## Examples
 
 + The **recommended** way to reduce the size of a video file is to use the [Constant Rate Factor (CRF)](https://trac.ffmpeg.org/wiki/Encode/H.264):
+> The range of the CRF scale is 0–51, where 0 is lossless, 23 is the default, and 51 is worst quality possible. A lower value generally leads to higher quality, and a subjectively sane range is 17–28. Consider 17 or 18 to be visually lossless or nearly so; it should look the same or nearly the same as the input but it isn't technically lossless.
+The range is exponential, so increasing the CRF value +6 results in roughly half the bitrate / file size, while -6 leads to roughly twice the bitrate.
+
+>Choose the highest CRF value that still provides an acceptable quality. If the output looks good, then try a higher value. If it looks bad, choose a lower value.
+
+Run the following commands to use a CRF value of 34 for example:
 ```bash
 python bvsr --crf 34 /path/to/the/source_folder
 ```
+
 This will output the results in a folder in the parent directory with the same name of your `source_folder` suffixed with `_bvsr`. 
 The output folder will have the same structure as the `source_folder` (i.e. processing the video files and just copying any other file. Use `--ignore-other-files` to ignore them instead).
 
@@ -80,4 +87,4 @@ _Although it is not guaranteed._
 
 ## License
 
-GPLv3 © [bvsr](https://github.com/abdeladim-s/bvsr)
+GPLv3 © [Batch Video Size Reduction (BVSR)](https://github.com/abdeladim-s/bvsr)
