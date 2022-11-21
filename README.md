@@ -62,7 +62,7 @@ The range is exponential, so increasing the CRF value +6 results in roughly half
 
 >Choose the highest CRF value that still provides an acceptable quality. If the output looks good, then try a higher value. If it looks bad, choose a lower value.
 
-Run the following commands to use a CRF value of 34 for example:
+Run the following command to use a CRF value of 34 for example:
 ```bash
 python bvsr --crf 34 /path/to/the/source_folder
 ```
