@@ -19,9 +19,6 @@ https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-wi
 https://slhck.info/video/2017/02/24/crf-guide.html
 https://trac.ffmpeg.org/wiki/Encode/H.264
 https://en.wikipedia.org/wiki/Bit_rate
-
-TODO: QUEUE
-TODO: Turn OFF
 """
 
 __author__ = "Abdeladim S."
@@ -29,6 +26,7 @@ __copyright__ = "Copyright 2022, "
 __deprecated__ = False
 __license__ = "GPLv3"
 __maintainer__ = __author__
+__github__ = "https://github.com/abdeladim-s/bvsr"
 __version__ = "1.0.0"
 
 __header__ = f"""
