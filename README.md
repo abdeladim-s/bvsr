@@ -16,6 +16,7 @@ pip install bvsr
 or clone from source
 ```bash
 git clone https://github.com/abdeladim-s/bvsr && cd bvsr
+pip install -r requirements.txt
 ```
 ##
 
