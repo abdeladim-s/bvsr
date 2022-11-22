@@ -37,7 +37,7 @@ import os
 import mimetypes
 from os.path import exists
 import importlib.metadata
-from utils import *
+from .utils import *
 
 gevent.monkey.patch_all(thread=False)
 
