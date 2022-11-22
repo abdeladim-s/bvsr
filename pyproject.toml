@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "bvsr"
+version = "1.0.5"
+description = "Batch Video Size Reduction (BVSR) using ffmpeg."
+authors = ["abdeladim-s <sadiki.abdeladim@gmail.com>"]
+license = "GPLv3"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+ffmpeg-python = "^0.2.0"
+gevent = "22.10.2"
+tqdm = "4.64.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/abdeladim-s/bvsr"
+"Bug Tracker" = "https://github.com/abdeladim-s/bvsr/issues"
+
+[tool.poetry.scripts]
+bvsr = 'bvsr.bvsr:main'

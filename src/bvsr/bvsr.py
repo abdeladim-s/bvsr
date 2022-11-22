@@ -27,7 +27,7 @@ __deprecated__ = False
 __license__ = "GPLv3"
 __maintainer__ = __author__
 __github__ = "https://github.com/abdeladim-s/bvsr"
-__version__ = "1.0.0"
+__version__ = '0.1.2'
 
 __header__ = f"""
 
@@ -386,7 +386,7 @@ def show_progress(total_duration):
             yield socket_filename
 
 
-if __name__ == '__main__':
+def main():
     print(__header__)
     parser = argparse.ArgumentParser(description="", allow_abbrev=True)
     # Positional args
@@ -429,3 +429,7 @@ if __name__ == '__main__':
                 target_size=args.target_size,
                 ignore_other_files=args.ignore_other_files)
     bvsr.run()
+
+
+if __name__ == '__main__':
+    main()

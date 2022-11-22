@@ -13,12 +13,6 @@ A python script to reduce the size of all videos in a folder while keeping its e
 ```bash
 pip install bvsr
 ```
-or clone from source
-```bash
-git clone https://github.com/abdeladim-s/bvsr && cd bvsr
-pip install -r requirements.txt
-```
-##
 
 ## Usage
 ```bash
@@ -65,7 +59,7 @@ The range is exponential, so increasing the CRF value +6 results in roughly half
 
 Run the following command to use a CRF value of 34 for example:
 ```bash
-python bvsr --crf 34 /path/to/the/source_folder
+bvsr --crf 34 /path/to/the/source_folder
 ```
 
 This will output the results in a folder in the parent directory with the same name of your `source_folder` suffixed with `_bvsr`. 
@@ -75,14 +69,14 @@ The output folder will have the same structure as the `source_folder` (i.e. proc
 
 + If you want to specify a video quality rather than using the CRF:
 ```bash
-python bvsr --video-quality 480p /path/to/the/source_folder
+bvsr --video-quality 480p /path/to/the/source_folder
 ```
 [Available qualities](https://en.wikipedia.org/wiki/Bit_rate): `['videophone', 'videoconferencing', '240p', '360p', '480p', 'VCD', '720p',
                         '720p60', '1080p', '1080p60']`
 
 + If you just care about the size and not the quality, you can specify a  target size in `MB` directly:
 ```bash
-python bvsr --target-size 100 --destination-folder /path/to/destination_folder
+bvsr --target-size 100 --destination-folder /path/to/destination_folder
 ```
 _Although it is not guaranteed._ 
 
