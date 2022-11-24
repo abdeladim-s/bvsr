@@ -190,14 +190,14 @@ class BVSR:
             for root, dirs, files in os.walk(self.source_folder, topdown=True):
                 for name in files:
                     # create the same directory structure in the output folder
-                    target_dir = root.replace(str(self.source_folder), str(destination_folder))
+                    target_dir = Path(root.replace(str(self.source_folder), str(destination_folder)))
                     os.makedirs(target_dir, exist_ok=True)
                     if exists(os.path.join(target_dir, name)):  # if file already exist in target dir, skip it
-                        print("Skip file `{}` (already exists)".format(name))
+                        print(f"Skip file `{target_dir.name}/{name}` (already exists)")
                         continue
                     file_type = mimetypes.guess_type(os.path.join(root, name))[0]
                     if file_type is not None and file_type.startswith('video'):
-                        print("Video file Found:  {}".format(name))
+                        print(f"Video file Found: `{target_dir.name}/{name}`")
                         print("Processing ...")
                         video_path = os.path.join(root, name)
                         video_output = os.path.join(target_dir, name)
