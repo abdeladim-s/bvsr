@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bvsr"
-version = "1.0.7"
+version = "1.0.8"
 description = "Batch Video Size Reduction (BVSR) using ffmpeg."
 authors = ["abdeladim-s <sadiki.abdeladim@gmail.com>"]
 license = "GPLv3"
