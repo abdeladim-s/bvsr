@@ -23,6 +23,8 @@ https://en.wikipedia.org/wiki/Bit_rate
 """
 
 from pathlib import Path
+from pprint import pprint
+
 from tqdm import tqdm
 import argparse
 import contextlib
@@ -118,8 +120,17 @@ class BVSR:
 
     def process_video(self, video_input, video_output, video_format):
         probe = ffmpeg.probe(video_input)
-        duration = float(probe['format']['duration'])
-        audio_bitrate = float(next((s for s in probe['streams'] if s['codec_type'] == 'audio'), None)['bit_rate'])
+        # pprint(probe)
+        format = probe['format']['format_long_name']
+        error_flag = False
+        try:
+            duration = float(probe['format']['duration'])
+            audio_bitrate = float(next((s for s in probe['streams'] if s['codec_type'] == 'audio'), None)['bit_rate'])
+        except KeyError as e:
+            # https://stackoverflow.com/questions/34118013/how-to-determine-webm-duration-using-ffprobe
+            error_flag = True
+            print(f'!!! Unable to get duration and bitrate, Unsupported video type `{format}`')
+            return
 
         if self.audio_quality is not None:
             audio_bitrate = AUDIO_BITRATES[self.audio_quality]
@@ -128,8 +139,14 @@ class BVSR:
         video_input = ffmpeg.input(video_input)
 
         if self.video_quality is not None:
+            if error_flag:
+                print(f"!!! Unsupported operation with videos of type {format}")
+                return
             cmd = {'b:v': VIDEO_BITRATES[self.video_quality], 'b:a': audio_bitrate}
         elif self.target_size is not None:
+            if error_flag:
+                print(f"!!! Unsupported operation with videos of type {format}")
+                return
             # Credits to: https://stackoverflow.com/questions/64430805/how-to-compress-video-to-target-size-by-python
             target_total_bitrate = (self.target_size * 1000 * 1024 * 8) / (1.073741824 * duration)
             # Target video bitrate, in bps.
