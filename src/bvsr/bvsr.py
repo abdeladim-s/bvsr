@@ -130,7 +130,7 @@ class BVSR:
             # https://stackoverflow.com/questions/34118013/how-to-determine-webm-duration-using-ffprobe
             error_flag = True
             print(f'!!! Unable to get duration and bitrate, Unsupported video type `{format}`')
-            return
+            return False
 
         if self.audio_quality is not None:
             audio_bitrate = AUDIO_BITRATES[self.audio_quality]
@@ -141,12 +141,12 @@ class BVSR:
         if self.video_quality is not None:
             if error_flag:
                 print(f"!!! Unsupported operation with videos of type {format}")
-                return
+                return False
             cmd = {'b:v': VIDEO_BITRATES[self.video_quality], 'b:a': audio_bitrate}
         elif self.target_size is not None:
             if error_flag:
                 print(f"!!! Unsupported operation with videos of type {format}")
-                return
+                return False
             # Credits to: https://stackoverflow.com/questions/64430805/how-to-compress-video-to-target-size-by-python
             target_total_bitrate = (self.target_size * 1000 * 1024 * 8) / (1.073741824 * duration)
             # Target video bitrate, in bps.
@@ -156,6 +156,7 @@ class BVSR:
             cmd = {'crf': self.crf}
 
         self.__ffmpeg(video_input, duration, video_output, video_format, cmd)
+        return True
 
     def __ffmpeg(self, video_input, duration, video_output, video_format, cmd):
         with show_progress(duration) as socket_filename:
@@ -202,7 +203,12 @@ class BVSR:
                         video_path = os.path.join(root, name)
                         video_output = os.path.join(target_dir, name)
                         file_type, file_ext = file_type.split('/')
-                        self.process_video(video_path, video_output, file_ext)
+                        was_it_successful = self.process_video(video_path, video_output, file_ext)
+                        if not was_it_successful or was_it_successful is None:
+                            # just copy the video as is
+                            print("Copying video as is {} ...".format(name))
+                            Copy.copy_with_progress(os.path.join(root, name), os.path.join(target_dir, name))
+                            print()
                     else:
                         # if ignore other files is true, just skip them
                         if self.ignore_other_files:
