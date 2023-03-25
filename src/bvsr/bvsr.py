@@ -126,7 +126,7 @@ class BVSR:
         try:
             duration = float(probe['format']['duration'])
             audio_bitrate = float(next((s for s in probe['streams'] if s['codec_type'] == 'audio'), None)['bit_rate'])
-        except KeyError as e:
+        except Exception as e:
             # https://stackoverflow.com/questions/34118013/how-to-determine-webm-duration-using-ffprobe
             error_flag = True
             print(f'!!! Unable to get duration and bitrate, Unsupported video type `{format}`')
