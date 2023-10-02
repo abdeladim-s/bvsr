@@ -9,7 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 ffmpeg-python = "^0.2.0"
-gevent = "22.10.2"
+gevent = "23.9.1"
 tqdm = "4.64.1"
 
 
